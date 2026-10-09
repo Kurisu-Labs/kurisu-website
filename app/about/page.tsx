@@ -4,7 +4,7 @@ import { BrandMark } from '@/components/brand-mark';
 import { Arrow } from '@/components/icons';
 export const metadata = pageMetadata(
   'About',
-  'An independent research and engineering collective focused on blockchain and decentralized systems, with room to explore across technologies and ecosystems.',
+  'An independent research and engineering collective exploring decentralized systems and blockchain, open to research collaborations and software projects.',
   '/about',
 );
 export default function About() {
@@ -17,8 +17,8 @@ export default function About() {
           <br className="desktop-break" /> to explore and build.
         </h1>
         <p className="lead">
-          Kurisu Labs is an independent research and engineering collective focused on blockchain
-          and decentralized systems.
+          Kurisu Labs is an independent research and engineering collective focused on decentralized
+          systems and blockchain.
         </p>
       </section>
       <section className="container about-statement">
@@ -36,9 +36,10 @@ export default function About() {
             build experiments, and turn useful results into working systems.
           </p>
           <p>
-            Blockchain and Web3 are our current focus. Our interests also span developer tools,
-            privacy, AI, and the infrastructure connecting these fields. Each project can take its
-            own direction while contributing to a shared body of knowledge and experience.
+            Decentralized systems, blockchain, and Web3 are our current focus. Our interests also
+            span developer tools, privacy, AI, and the infrastructure connecting these fields. Each
+            project can take its own direction while contributing to a shared body of knowledge and
+            experience.
           </p>
         </div>
       </section>
@@ -87,13 +88,13 @@ export default function About() {
           </div>
           <div>
             <p className="lead">
-              One direction we explore is how existing systems can work with decentralized
+              We help teams explore the shift from conventional systems toward decentralized
               infrastructure.
             </p>
             <p>
-              Through research, prototypes, and selective collaboration, we test practical Web2–Web3
-              integrations: where they offer advantages, and where a simpler or hybrid approach
-              makes more sense.
+              Through research, prototypes, and engineering collaboration, we explore practical
+              steps from Web2 to Web3. This can mean adding blockchain capabilities to an existing
+              product, designing a hybrid architecture, or developing a new solution together.
             </p>
             <Link className="text-link" href="/research#applied-decentralization">
               Explore this research direction

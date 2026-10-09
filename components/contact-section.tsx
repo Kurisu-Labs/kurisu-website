@@ -6,17 +6,11 @@ export function ContactSection() {
     <section className="contact-section" id="contact" aria-labelledby="contact-title">
       <div className="container contact-inner">
         <div>
-          <p className="eyebrow">Start a conversation</p>
-          <h2 id="contact-title">
-            What are you
-            <br className="desktop-break" /> thinking about?
-          </h2>
+          <p className="eyebrow">{homeCopy.contact.eyebrow}</p>
+          <h2 id="contact-title">{homeCopy.contact.title}</h2>
         </div>
         <div className="contact-actions">
-          <p>
-            A technical question, an early idea, or a research collaboration. We’d like to hear
-            about it.
-          </p>
+          <p>{homeCopy.contact.body}</p>
           <a className="contact-email" href={`mailto:${site.email}`}>
             {site.email}
             <Arrow external />

@@ -4,13 +4,13 @@
     "url": "https://kurisulabs.tech",
     "email": "hello@kurisulabs.tech",
     "github": "https://github.com/Kurisu-Labs",
-    "description": "Kurisu Labs is an independent research and engineering collective exploring blockchain, Web3, and decentralized systems across ecosystems."
+    "description": "Kurisu Labs explores decentralized systems and blockchain through research and engineering, helping teams connect existing products with Web3 possibilities."
   },
   "home": {
     "hero": {
       "eyebrow": "Independent research & engineering collective",
-      "title": "Exploring ideas. Building working systems.",
-      "body": "We explore blockchain and decentralized systems through research and practical engineering—building experimental products, developer tools, and infrastructure across ecosystems.",
+      "title": "Building a decentralized future, together.",
+      "body": "Explore the move from Web2 to decentralized systems with us. Through research and practical engineering, we build blockchain tools, products, and Web3 integrations.",
       "primaryCtaWithoutWork": {
         "label": "Explore our research",
         "href": "/research"
@@ -26,18 +26,18 @@
     },
     "directions": {
       "title": "Questions we’re exploring",
-      "intro": "Our current focus is blockchain and decentralized systems: how they work, where they help, and what it takes to build with them."
+      "intro": "Our current focus is decentralized systems and the blockchain infrastructure behind them: how they work, where they help, and what it takes to build with them."
     },
     "approach": {
       "title": "Small teams. Open questions. Practical experiments.",
       "body": "We work in small, project-led teams. We investigate a question, build a prototype, test its assumptions, and decide what is worth developing further. Some experiments become tools or products. Others become useful findings and new questions."
     },
     "collaboration": {
-      "title": "Explore a technical question with us.",
-      "body": "We’re interested in collaborations that connect research with real engineering needs—from developer tooling and blockchain prototypes to practical Web2–Web3 integrations.",
-      "supportingLine": "A fully decentralized system is not always the answer. Sometimes the useful result is a simpler design, a hybrid architecture, or a clearer understanding of the trade-offs.",
+      "title": "Connecting existing systems with decentralized possibilities.",
+      "body": "We help teams explore how decentralized technology can fit into the systems they already use. Together, we can test an idea, design a hybrid architecture, or build a blockchain integration.",
+      "supportingLine": "We start with the problem, then choose where decentralized technology can make a useful difference. A simpler design or a hybrid approach can be the right result.",
       "cta": {
-        "label": "Discuss a collaboration",
+        "label": "Discuss your project",
         "href": "mailto:hello@kurisulabs.tech"
       }
     },
@@ -49,6 +49,11 @@
       "label": "Copy email",
       "success": "Email copied",
       "error": "Couldn’t copy the email. You can select and copy the address instead."
+    },
+    "contact": {
+      "eyebrow": "Let’s build together",
+      "title": "Have a project in mind?",
+      "body": "We’re open to research collaborations, freelance engineering projects, and tailored software solutions. Tell us what you want to build, improve, or connect."
     }
   },
   "directions": [

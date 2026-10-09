@@ -1,8 +1,9 @@
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { homeCopy, site } from '@/lib/site';
 
-export const alt = 'Kurisu Labs — Exploring ideas. Building working systems.';
+export const alt = `${site.name}: ${homeCopy.hero.title}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const dynamic = 'force-static';
@@ -50,7 +51,7 @@ export default async function SocialImage() {
           marginTop: 78,
         }}
       >
-        Exploring ideas. Building working systems.
+        {homeCopy.hero.title}
       </div>
       <div
         style={{

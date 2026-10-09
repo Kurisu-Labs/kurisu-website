@@ -33,7 +33,7 @@ export default async function Work() {
       <section className="container page-intro">
         <p className="eyebrow">Projects, tools & experiments</p>
         <h1>Work</h1>
-        <p className="lead">Products, tools, and experiments—at different stages of development.</p>
+        <p className="lead">Products, tools, and experiments at different stages of development.</p>
       </section>
       <div className="container pb-24">
         {groups

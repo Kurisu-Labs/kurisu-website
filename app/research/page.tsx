@@ -5,7 +5,7 @@ import { ResearchDirections } from '@/components/research-directions';
 import { NoteList } from '@/components/note-list';
 export const metadata = pageMetadata(
   'Research',
-  'Research directions in blockchain infrastructure, privacy and verification, AI coordination, and practical Web2–Web3 integration.',
+  'Research into decentralized systems, blockchain infrastructure, privacy, AI coordination, and practical Web2–Web3 integration.',
   '/research',
 );
 export default async function Research() {
@@ -19,8 +19,9 @@ export default async function Research() {
           <br className="desktop-break" /> by questions.
         </h1>
         <p className="lead">
-          We explore questions in blockchain infrastructure, cryptographic verification, and
-          decentralized coordination—and test where these technologies can be useful.
+          We explore decentralized systems, the blockchain infrastructure behind them, and the
+          questions they raise about privacy and coordination. Our experiments help us understand
+          where these technologies can be useful.
         </p>
       </section>
       <section className="container section agenda-section" aria-labelledby="agenda-title">

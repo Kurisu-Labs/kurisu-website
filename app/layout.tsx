@@ -9,7 +9,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: 'Kurisu Labs — Research & Engineering', template: '%s | Kurisu Labs' },
+  title: { default: 'Kurisu Labs | Research & Engineering', template: '%s | Kurisu Labs' },
   description: site.description,
   robots: { index: indexable, follow: indexable },
   icons: {

@@ -18,11 +18,7 @@ export function HomeContent({ manifest }: { manifest: PublicManifest }) {
       <section className="hero container" aria-labelledby="home-title">
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">{homeCopy.hero.eyebrow}</p>
-          <h1 id="home-title">
-            Exploring ideas.
-            <br />
-            Building working systems.
-          </h1>
+          <h1 id="home-title">{homeCopy.hero.title}</h1>
           <p className="hero-description">{homeCopy.hero.body}</p>
           <div className="hero-actions">
             <a className="button button-primary" href={cta.href}>

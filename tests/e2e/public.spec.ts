@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import sharp from 'sharp';
 
 const pages = [
-  ['/', 'Exploring ideas.'],
+  ['/', 'Building a decentralized future, together.'],
   ['/research', 'An agenda, shaped'],
   ['/about', 'An independent place'],
   ['/privacy', 'Privacy'],
@@ -211,7 +211,7 @@ test('content, mobile navigation and contact work without JavaScript', async ({ 
   });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:3100/');
-  await expect(page.locator('h1')).toContainText('Exploring ideas.');
+  await expect(page.locator('h1')).toContainText('Building a decentralized future, together.');
   await page.locator('.mobile-navigation summary').click();
   await expect(page.getByRole('navigation', { name: 'Mobile' })).toBeVisible();
   await page

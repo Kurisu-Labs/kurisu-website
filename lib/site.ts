@@ -45,7 +45,7 @@ export function pageMetadata(title: string, description: string, path: string): 
           url: `${site.url}/opengraph-image`,
           width: 1200,
           height: 630,
-          alt: 'Kurisu Labs — Exploring ideas. Building working systems.',
+          alt: `${site.name}: ${homeCopy.hero.title}`,
         },
       ],
     },

@@ -1,5 +1,5 @@
 // Synthetic data is imported only by unit tests and the separate local Vite harness.
-export const marker = 'QA FIXTURE — NOT A KURISU PROJECT';
+export const marker = 'QA FIXTURE: NOT A KURISU PROJECT';
 export const approval = {
   reviewer: 'QA reviewer',
   approvedAt: '2026-10-01',
@@ -35,7 +35,7 @@ export const project = {
 export const note = {
   kind: 'research',
   slug: 'qa-fixture-note',
-  title: 'QA FIXTURE — Testing article structure with a deliberately long title',
+  title: 'QA FIXTURE: Testing article structure with a deliberately long title',
   summary: 'Synthetic text for article rendering. Not a Kurisu publication.',
   publicationState: 'public',
   approval,

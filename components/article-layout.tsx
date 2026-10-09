@@ -39,7 +39,7 @@ export function ArticleLayout({ note, projects }: { note: ResearchNote; projects
                 {note.sources.map((source) => (
                   <li key={source.url}>
                     <a href={source.url}>{source.title}</a>
-                    {source.accessedAt && <span> — accessed {displayDate(source.accessedAt)}</span>}
+                    {source.accessedAt && <span> (accessed {displayDate(source.accessedAt)})</span>}
                   </li>
                 ))}
               </ol>
