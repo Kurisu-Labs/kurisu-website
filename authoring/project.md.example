@@ -1,0 +1,28 @@
+---
+kind: project
+slug: replace-with-project-slug
+title: Replace with reviewed project title
+summary: Replace with an accurate, specific summary.
+publicationState: draft
+type: proof-of-concept
+status: experiment
+attribution: kurisu-project
+attributionNote: Replace with the exact approved relationship and scope of contribution.
+areas: []
+ecosystems: []
+contributors:
+  - Replace with a contributor whose name is approved for publication
+period: Replace with the actual period
+statusReviewedAt: '2026-10-09'
+featured: false
+problem: Replace with the actual context or question.
+approach: Replace with the method or implementation.
+limitations: Replace with the actual limitations and untested assumptions.
+links: {}
+relatedNotes: []
+media: []
+---
+
+Write reviewed project notes here. This example is not loaded as content.
+
+Do not mark public until the owner has approved the facts and attribution. Set the real status review date; the example date is not an approval.

@@ -1,0 +1,33 @@
+---
+kind: research
+slug: replace-with-note-slug
+title: Replace with reviewed article title
+summary: Replace with a specific excerpt.
+publicationState: draft
+type: research-note
+areas: []
+authors:
+  - Replace with an author who has approved publication
+publishedAt: '2026-10-09'
+relatedProjects: []
+sources: []
+media: []
+---
+
+## Question
+
+Describe the actual question.
+
+## Approach
+
+Document the setup and method.
+
+## Findings
+
+Report only observations supported by the work.
+
+## Limitations
+
+State what the evidence does and does not establish.
+
+Use the actual publication date when reviewed. This example has no approval record and is not publishable content.
