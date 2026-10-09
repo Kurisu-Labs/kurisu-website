@@ -5,7 +5,7 @@ import { ResearchDirections } from '@/components/research-directions';
 import { NoteList } from '@/components/note-list';
 export const metadata = pageMetadata(
   'Research',
-  'Our research agenda: developer tooling, privacy and verification, AI coordination, and practical Web2–Web3 integration.',
+  'Research directions in blockchain infrastructure, privacy and verification, AI coordination, and practical Web2–Web3 integration.',
   '/research',
 );
 export default async function Research() {
@@ -19,8 +19,8 @@ export default async function Research() {
           <br className="desktop-break" /> by questions.
         </h1>
         <p className="lead">
-          Our work starts with a technical question, a practical limitation, or an idea worth
-          testing.
+          We explore questions in blockchain infrastructure, cryptographic verification, and
+          decentralized coordination—and test where these technologies can be useful.
         </p>
       </section>
       <section className="container section agenda-section" aria-labelledby="agenda-title">
