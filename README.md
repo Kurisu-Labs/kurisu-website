@@ -91,3 +91,11 @@ Use standard `npm ci` → `npm run build` → `npm start` on a Node-compatible h
 Local/preview builds default to `noindex` and disallow crawling. `SITE_INDEXABLE=true` is a **build-time** setting reserved for an authorized live release; it enables robots indexing and the sitemap directive. Canonicals remain `https://kurisulabs.tech`; this is configuration, not a claim that the site is deployed. Robots settings are not access control.
 
 Choose a host and plan compatible with the organization's intended use. Production publication, paid services and domain changes require separate authorization. Preserve all existing Zoho MX/SPF/DKIM/DMARC/verification TXT records and nameservers. The application does not require changing email settings.
+
+### Netlify setup
+
+Connect `Kurisu-Labs/kurisu-website`, branch `main`, using the Free plan. The included `netlify.toml` sets `npm run build`, the `.next` publish directory, Node 24.13.0 and installation of development dependencies required by the build. Netlify's automatic Next.js adapter handles deployment; do not upload `.next` as a plain static site or add an SPA catch-all redirect.
+
+Initially leave `SITE_INDEXABLE` unset. Preview and branch contexts explicitly remain non-indexable. After the custom domain and public release are verified, set `SITE_INDEXABLE=true` for the production build context in Netlify and rebuild. A paid plan, add-on or trial is not required by this application; stay within the Free plan limits and review the account's usage settings.
+
+Keep DNS with the existing registrar. Add the custom domain to Netlify first, then use the website-specific targets shown in its domain panel. Preserve all existing email and verification records. No account IDs, access tokens or DNS credentials belong in this repository.
