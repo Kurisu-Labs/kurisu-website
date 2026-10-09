@@ -96,6 +96,6 @@ Choose a host and plan compatible with the organization's intended use. Producti
 
 Connect `Kurisu-Labs/kurisu-website`, branch `main`, using the Free plan. The included `netlify.toml` sets `npm run build`, the `.next` publish directory, Node 24.13.0 and installation of development dependencies required by the build. Netlify's automatic Next.js adapter handles deployment; do not upload `.next` as a plain static site or add an SPA catch-all redirect.
 
-Initially leave `SITE_INDEXABLE` unset. Preview and branch contexts explicitly remain non-indexable. After the custom domain and public release are verified, set `SITE_INDEXABLE=true` for the production build context in Netlify and rebuild. A paid plan, add-on or trial is not required by this application; stay within the Free plan limits and review the account's usage settings.
+The verified live domain is `https://kurisulabs.tech`. The production context in `netlify.toml` enables `SITE_INDEXABLE=true`; deploy previews, branch deploys and local development remain non-indexable. A paid plan, add-on or trial is not required by this application; stay within the Free plan limits and review the account's usage settings.
 
 Keep DNS with the existing registrar. Add the custom domain to Netlify first, then use the website-specific targets shown in its domain panel. Preserve all existing email and verification records. No account IDs, access tokens or DNS credentials belong in this repository.

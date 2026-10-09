@@ -6,8 +6,10 @@
   NODE_VERSION = "24.13.0"
   NPM_FLAGS = "--include=dev"
 
-# Production remains noindex until SITE_INDEXABLE=true is set in the hosting UI
-# after the custom domain is connected and the live release is verified.
+# The custom domain is verified with valid HTTPS. Only production may be indexed.
+[context.production.environment]
+  SITE_INDEXABLE = "true"
+
 [context.deploy-preview.environment]
   SITE_INDEXABLE = "false"
 
