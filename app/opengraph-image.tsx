@@ -14,7 +14,7 @@ export default async function SocialImage() {
         'node_modules/@ibm/plex-sans/fonts/complete/woff/IBMPlexSans-Medium.woff',
       ),
     ),
-    readFile(path.join(process.cwd(), 'public/brand/kurisu-mark.webp')),
+    readFile(path.join(process.cwd(), 'public/brand/icon-180.png')),
   ]);
   return new ImageResponse(
     <div
@@ -33,9 +33,9 @@ export default async function SocialImage() {
         {/* ImageResponse consumes embedded local bytes; no external fetch. */}
         <img
           alt=""
-          src={`data:image/webp;base64,${mark.toString('base64')}`}
+          src={`data:image/png;base64,${mark.toString('base64')}`}
           width={46}
-          height={42}
+          height={46}
           style={{ marginRight: 18 }}
         />
         Kurisu Labs

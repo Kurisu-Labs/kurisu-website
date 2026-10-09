@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import sharp from 'sharp';
 
 const pages = [
   ['/', 'Exploring ideas.'],
@@ -64,6 +65,19 @@ test('sitemap, robots, icons and branded social image are valid', async ({ reque
     expect(response.status()).toBe(200);
     expect(response.headers()['content-type']).toMatch(/^image\//);
     expect((await response.body()).byteLength).toBeGreaterThan(100);
+    if (path === '/opengraph-image') {
+      const { data, info } = await sharp(await response.body())
+        .extract({ left: 72, top: 60, width: 60, height: 70 })
+        .removeAlpha()
+        .raw()
+        .toBuffer({ resolveWithObject: true });
+      let maroonPixels = 0;
+      for (let index = 0; index < data.length; index += info.channels) {
+        if (data[index] > 40 && data[index] < 180 && data[index + 1] < 60 && data[index + 2] < 80)
+          maroonPixels++;
+      }
+      expect(maroonPixels).toBeGreaterThan(100);
+    }
   }
 });
 test('menu, current page, Escape and cross-page contact work by keyboard', async ({ page }) => {
