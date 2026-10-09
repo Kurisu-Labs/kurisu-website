@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.generated/
+.qa/
+docs/
+seed/
+prompts/
+content-templates/
+AGENTS.md
+START_HERE.md
+HANDOFF_*
+test-results/
+playwright-report/
+package-lock.json

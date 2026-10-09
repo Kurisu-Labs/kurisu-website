@@ -1,0 +1,68 @@
+/* Kurisu Labs semantic tokens. Local licensed IBM Plex files are loaded in app/globals.css. */
+:root {
+  color-scheme: light;
+  --color-brand: #6b0c1a;
+  --color-link: var(--color-brand);
+  --color-brand-hover: #510914;
+  --color-brand-soft: #f2dde1;
+  --color-bg: #fefcf9;
+  --color-surface: #f4eeea;
+  --color-text: #211b1d;
+  --color-text-muted: #6f6266;
+  --color-line: #d8cdd0; /* Decorative divider only; insufficient control border. */
+  --color-control-border: #8c7a80;
+  --color-dark: #211b1d;
+  --color-on-dark: #fefcf9;
+  --color-link-on-dark: #f1a8b6;
+  --color-error: #b42318;
+  --color-success: #276749;
+  --color-focus: var(--color-brand);
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --text-body: 1.125rem;
+  --text-ui: 1rem;
+  --text-meta: 0.875rem;
+  --text-hero: clamp(2.375rem, 1.25rem + 4vw, 5rem);
+  --text-title: clamp(2.125rem, 1.5rem + 2.5vw, 3.5rem);
+  --text-section: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --container-max: 75rem;
+  --article-max: 68ch;
+  --page-gutter: clamp(1.25rem, 4vw, 4rem);
+  --radius-control: 0.25rem;
+  --radius-panel: 0.5rem;
+  --target-control: 2.75rem;
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --motion-decorative: 450ms;
+  --ease-ui: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* A limited inverse surface, not a complete dark theme.
+   Components must use the local text/link/focus variables where applicable. */
+[data-surface='inverse'] {
+  --color-bg: var(--color-dark);
+  --color-text: var(--color-on-dark);
+  --color-text-muted: #d8cdd0;
+  --color-link: var(--color-link-on-dark);
+  --color-focus: var(--color-link-on-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-decorative: 0ms;
+  }
+  /* Implementation must also remove nonessential transform/reveal effects.
+     Do not leave content at opacity:0 when motion or JS is unavailable. */
+}
