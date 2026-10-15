@@ -14,8 +14,15 @@ export default function Privacy() {
         <h2>Using this website</h2>
         <p>
           This website does not embed analytics, advertising, social trackers, or a contact form.
-          Fonts and brand assets are served with the website. The interface does not set cookies or
-          use browser storage.
+          Fonts and brand assets are served with the website. The interface does not set cookies.
+        </p>
+        <h2>Your color theme</h2>
+        <p>
+          The website follows your device&apos;s color theme by default. If you choose Light or
+          Dark, that preference is saved in this browser&apos;s local storage so it can be
+          remembered on your next visit. It is not sent to us. Choosing System removes the saved
+          preference. The theme control still works for the current visit when browser storage is
+          unavailable.
         </p>
         <h2>Copying an address or code</h2>
         <p>

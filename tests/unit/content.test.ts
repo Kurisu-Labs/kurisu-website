@@ -68,6 +68,12 @@ describe('approval boundary', () => {
     expect(() => validateRecords([{ ...note, body: '[Hidden](/work/private-draft)' }])).toThrow(
       /link/i,
     ));
+  it('allows an approved note to link the public repository index without approving case studies', () => {
+    expect(validateRecords([{ ...note, body: '[Public work](/work)' }])).toHaveLength(1);
+    expect(() => validateRecords([{ ...note, body: '[Case study](/work/rentra)' }])).toThrow(
+      /link/i,
+    );
+  });
   it('loads exact extensions from allowlisted directories only', async () => {
     const root = await mkdtemp(join(tmpdir(), 'kurisu-content-'));
     try {

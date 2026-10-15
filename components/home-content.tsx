@@ -1,9 +1,14 @@
 import Link from 'next/link';
 import type { PublicManifest } from '@/lib/content/schema';
 import { homeCopy } from '@/lib/site';
-import { BrandMark } from './brand-mark';
+import { publicRepositories } from '@/lib/public-repositories';
 import { Arrow } from './icons';
-import { ResearchDirections } from './research-directions';
+import { LabField } from './lab-field';
+import { ResearchNetwork } from './research-network';
+import { PublicRepositoryList } from './public-repository-list';
+import { ProcessGlyph } from './process-glyph';
+import { AmbientSignal } from './ambient-signal';
+import { SectionTransition } from './section-transition';
 import { WorkList } from './work-list';
 import { NoteList } from './note-list';
 
@@ -18,65 +23,100 @@ export function HomeContent({ manifest }: { manifest: PublicManifest }) {
       <section className="hero container" aria-labelledby="home-title">
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow">{homeCopy.hero.eyebrow}</p>
+          <AmbientSignal mobileOnly />
           <h1 id="home-title">{homeCopy.hero.title}</h1>
           <p className="hero-description">{homeCopy.hero.body}</p>
           <div className="hero-actions">
-            <a className="button button-primary" href={cta.href}>
+            <Link className="button button-primary" href={cta.href}>
               {cta.label}
               <Arrow />
-            </a>
+            </Link>
             <Link className="text-link" href="/about">
               {homeCopy.hero.secondaryCta.label}
             </Link>
           </div>
         </div>
-        <div className="hero-composition" aria-hidden="true">
-          <div className="mark-frame">
-            <span className="frame-line frame-line-top" />
-            <BrandMark />
-            <span className="frame-line frame-line-bottom" />
-          </div>
-          <span className="composition-caption">Ideas into form.</span>
+        <LabField />
+        <div className="hero-index">
+          <span className="meta">INDEPENDENT MINDS. SHARED CURIOSITY.</span>
+          <a href="#research-network">
+            Explore the lab <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </section>
-      {selected.length > 0 && (
-        <section className="container section" aria-labelledby="work-title">
-          <div className="section-heading">
-            <h2 id="work-title">
-              {selected.every((project) => project.attribution === 'member-prior-work')
-                ? 'Previous work by our members'
-                : 'Selected work'}
-            </h2>
-            <Link className="text-link" href="/work">
-              All work <Arrow />
-            </Link>
-          </div>
-          <WorkList projects={selected} />
-        </section>
-      )}
-      <section className="container section research-section" aria-labelledby="directions-title">
-        <div className="section-intro">
+      <section
+        id="research-network"
+        className="container section research-section"
+        aria-labelledby="directions-title"
+      >
+        <div className="section-intro" data-scroll-reveal>
           <div>
-            <p className="eyebrow">Research directions</p>
+            <p className="eyebrow">
+              <span className="section-number">01 /</span> Research directions
+            </p>
             <h2 id="directions-title">{homeCopy.directions.title}</h2>
           </div>
           <p>{homeCopy.directions.intro}</p>
         </div>
-        <ResearchDirections />
+        <ResearchNetwork id="living-research" />
         <Link className="text-link section-more" href="/research">
           Our research agenda <Arrow />
         </Link>
       </section>
-      <section className="approach-section" aria-labelledby="approach-title">
-        <div className="container">
-          <div className="section-intro">
+      {(publicRepositories.length > 0 || selected.length > 0) && (
+        <section
+          id="public-work"
+          className="container section public-work-section"
+          aria-labelledby="public-work-title"
+        >
+          <SectionTransition kind="research-work" />
+          <div className="section-intro" data-scroll-reveal>
             <div>
-              <p className="eyebrow">How we work</p>
+              <p className="eyebrow">
+                <span className="section-number">02 /</span> Public work
+              </p>
+              <h2 id="public-work-title">
+                Out of the lab.
+                <br />
+                Into the open.
+              </h2>
+            </div>
+            <p>
+              Explore the products, tools, and experiments in our public GitHub repositories. Follow
+              the code to see what each project does.
+            </p>
+          </div>
+          {publicRepositories.length > 0 && (
+            <PublicRepositoryList repositories={publicRepositories} />
+          )}
+          {selected.length > 0 && (
+            <div className="approved-work">
+              <h3>
+                {selected.every((project) => project.attribution === 'member-prior-work')
+                  ? 'Previous work by our members'
+                  : 'Selected work'}
+              </h3>
+              <WorkList projects={selected} />
+            </div>
+          )}
+          <Link className="text-link section-more" href="/work">
+            Explore all work <Arrow />
+          </Link>
+        </section>
+      )}
+      <section id="method" className="approach-section" aria-labelledby="approach-title">
+        <SectionTransition kind="work-method" contained />
+        <div className="container">
+          <div className="section-intro" data-scroll-reveal>
+            <div>
+              <p className="eyebrow">
+                <span className="section-number">03 /</span> How we work
+              </p>
               <h2 id="approach-title">{homeCopy.approach.title}</h2>
             </div>
             <p>{homeCopy.approach.body}</p>
           </div>
-          <ol className="process-list">
+          <ol className="process-list" data-scroll-reveal>
             {[
               ['Investigate', 'Start with a question. Understand the context and the constraints.'],
               ['Prototype', 'Make an idea tangible. Build enough to test the assumptions.'],
@@ -86,8 +126,11 @@ export function HomeContent({ manifest }: { manifest: PublicManifest }) {
                 'Take useful results further. Document the learning along the way.',
               ],
             ].map(([title, body], i) => (
-              <li key={title}>
-                <span className="process-number">0{i + 1}</span>
+              <li key={title} data-scroll-focus>
+                <div className="process-step">
+                  <span className="process-number">0{i + 1}</span>
+                  <ProcessGlyph stage={i} />
+                </div>
                 <h3>{title}</h3>
                 <p>{body}</p>
               </li>
@@ -96,12 +139,17 @@ export function HomeContent({ manifest }: { manifest: PublicManifest }) {
         </div>
       </section>
       <section
+        id="collaboration"
         className="container section collaboration-section"
         aria-labelledby="collaboration-title"
       >
+        <SectionTransition kind="method-collaboration" />
         <div>
-          <p className="eyebrow">Applied collaboration</p>
+          <p className="eyebrow">
+            <span className="section-number">04 /</span> Applied collaboration
+          </p>
           <h2 id="collaboration-title">{homeCopy.collaboration.title}</h2>
+          <AmbientSignal />
         </div>
         <div>
           <p className="lead">{homeCopy.collaboration.body}</p>
@@ -123,6 +171,9 @@ export function HomeContent({ manifest }: { manifest: PublicManifest }) {
           <NoteList notes={manifest.research.slice(0, 3)} />
         </section>
       )}
+      <div className="home-contact-transition" aria-hidden="true">
+        <SectionTransition kind="collaboration-contact" contained />
+      </div>
     </>
   );
 }
