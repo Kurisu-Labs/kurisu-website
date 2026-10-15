@@ -1,0 +1,283 @@
+/* Use the existing section padding as a shared visual seam, without moving any content. */
+.public-work-section:has(> .section-transition),
+.approach-section:has(> .section-transition),
+.collaboration-section:has(> .section-transition) {
+  position: relative;
+  border-top: 0;
+}
+.approach-section:has(> .section-transition) {
+  border-bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg),
+    var(--color-surface) 10rem,
+    var(--color-surface) calc(100% - 6rem),
+    var(--color-bg)
+  );
+}
+/* Each page owns its boundary; the shared contact content and landmarks stay unchanged. */
+.home-contact-transition,
+.page-contact-transition {
+  position: relative;
+  height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.home-contact-transition > .section-transition,
+.page-contact-transition > .section-transition {
+  height: 5rem;
+}
+.home-contact-transition + .contact-section,
+.page-contact-transition + .contact-section {
+  border-top: 0;
+  background-image:
+    linear-gradient(to bottom, var(--color-bg), transparent 5rem),
+    linear-gradient(110deg, var(--color-contact-wash), transparent 65%);
+}
+
+/* Secondary pages reuse the same passage without translating the section or its links. */
+.page-passage:has(> .section-transition) {
+  position: relative;
+  padding-top: 5rem;
+  border-top: 0;
+}
+.page-passage > .section-transition {
+  height: 5rem;
+}
+.page-passage .section-transition-label,
+.page-contact-transition .section-transition-label {
+  max-width: calc(100% - 2rem);
+  text-align: right;
+}
+.about-statement.page-passage {
+  border-bottom: 0;
+}
+.applied-panel.page-passage {
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg),
+    var(--color-surface) 5rem,
+    var(--color-surface) calc(100% - 5rem),
+    var(--color-bg)
+  );
+}
+.research-practice.page-passage {
+  max-width: none;
+}
+.research-practice-content {
+  max-width: 46rem;
+}
+.work-index {
+  padding-bottom: 6rem;
+}
+.work-index > section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.work-group {
+  margin-top: 4rem;
+}
+.section-transition {
+  --transition-drop: 40px;
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6rem;
+  pointer-events: none;
+  user-select: none;
+  color: var(--color-brand);
+}
+.section-transition-track,
+.section-transition-line,
+.section-transition-stem,
+.section-transition-stem-fill,
+.section-transition-wash {
+  position: absolute;
+  display: block;
+}
+.section-transition-track {
+  inset: 0 0 auto 6px;
+  height: 1px;
+  background: var(--color-line);
+}
+.section-transition-line {
+  inset: 0;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-maroon-bright));
+  transform-origin: right;
+  opacity: 0.65;
+}
+.section-transition-stem {
+  top: 0;
+  left: 6px;
+  width: 1px;
+  height: var(--transition-drop);
+  background: var(--color-line);
+}
+.section-transition-stem-fill {
+  inset: 0;
+  background: var(--color-brand);
+  transform-origin: top;
+  opacity: 0.65;
+}
+.section-transition-marker {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  fill: var(--color-bg);
+  stroke: currentColor;
+  stroke-width: 1;
+  transform: translateY(var(--transition-drop));
+}
+.section-transition-marker circle {
+  fill: currentColor;
+  stroke: none;
+}
+.section-transition-label {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+.section-transition-wash {
+  inset: 0;
+  background: radial-gradient(ellipse at 8% 0%, var(--color-field-wash), transparent 65%);
+  opacity: 0.2;
+}
+
+@media (max-width: 760px) {
+  .section-transition {
+    --transition-drop: 24px;
+    height: 3.5rem;
+  }
+  .section-transition-label {
+    top: 0.5rem;
+  }
+  .approach-section:has(> .section-transition) {
+    background: linear-gradient(
+      to bottom,
+      var(--color-bg),
+      var(--color-surface) 6rem,
+      var(--color-surface) calc(100% - 3.5rem),
+      var(--color-bg)
+    );
+  }
+  .page-passage:has(> .section-transition) {
+    padding-top: 3rem;
+  }
+  .page-passage > .section-transition,
+  .home-contact-transition > .section-transition,
+  .page-contact-transition > .section-transition {
+    height: 3rem;
+  }
+  .home-contact-transition + .contact-section,
+  .page-contact-transition + .contact-section {
+    background-image:
+      linear-gradient(to bottom, var(--color-bg), transparent 3rem),
+      linear-gradient(110deg, var(--color-contact-wash), transparent 65%);
+  }
+  .applied-panel.page-passage {
+    background: linear-gradient(
+      to bottom,
+      var(--color-bg),
+      var(--color-surface) 3rem,
+      var(--color-surface) calc(100% - 3rem),
+      var(--color-bg)
+    );
+  }
+  .work-index {
+    padding-bottom: 3.5rem;
+  }
+  .work-group {
+    margin-top: 3rem;
+  }
+}
+
+/* Browser-owned progress works in both scroll directions and needs no scroll listener. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) and (animation-range: cover 0% cover 65%) {
+    .section-transition {
+      view-timeline-name: --section-passage;
+      view-timeline-axis: block;
+    }
+    .section-transition[data-ambient-ready='true'][data-ambient-running='true'] {
+      .section-transition-line,
+      .section-transition-stem-fill,
+      .section-transition-marker,
+      .section-transition-wash {
+        animation-duration: 1ms;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: --section-passage;
+        animation-range: cover 0% cover 65%;
+      }
+      .section-transition-line {
+        animation-name: section-passage-line;
+      }
+      .section-transition-stem-fill {
+        animation-name: section-passage-stem;
+      }
+      .section-transition-marker {
+        animation-name: section-passage-marker;
+      }
+      .section-transition-wash {
+        animation-name: section-passage-wash;
+      }
+    }
+  }
+}
+
+@keyframes section-passage-line {
+  0% {
+    transform: scaleX(0.03);
+    opacity: 0.35;
+  }
+  60%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.9;
+  }
+}
+@keyframes section-passage-stem {
+  0%,
+  55% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes section-passage-marker {
+  0%,
+  50% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--transition-drop)) rotate(90deg);
+    opacity: 1;
+  }
+}
+@keyframes section-passage-wash {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.65;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@media print {
+  .section-transition {
+    display: none;
+  }
+}
