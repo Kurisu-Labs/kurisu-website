@@ -77,7 +77,6 @@ export default async function SocialImage() {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {/* Preserve the original maroon mark on its existing light tile. */}
           {/* ImageResponse embeds local bytes and cannot render the Next Image component. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             src={`data:image/png;base64,${mark.toString('base64')}`}
