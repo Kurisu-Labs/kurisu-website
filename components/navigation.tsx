@@ -1,7 +1,10 @@
 'use client';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRef, useState, useSyncExternalStore } from 'react';
 import { Arrow } from './icons';
+import { ThemeSwitcher } from './theme-switcher';
+import { SectionLink } from './section-link';
 
 const subscribe = () => () => {};
 export function Navigation({
@@ -19,19 +22,22 @@ export function Navigation({
     () => true,
     () => false,
   );
-  const items = links.map((link) => (
-    <a
-      key={link.href}
-      href={link.href}
-      aria-current={
-        link.href === pathname || (link.href !== '/' && pathname.startsWith(`${link.href}/`))
-          ? 'page'
-          : undefined
-      }
-    >
-      {link.label}
-    </a>
-  ));
+  const items = links.map((link) => {
+    const NavigationLink = link.href.includes('#') ? SectionLink : Link;
+    return (
+      <NavigationLink
+        key={link.href}
+        href={link.href}
+        aria-current={
+          link.href === pathname || (link.href !== '/' && pathname.startsWith(`${link.href}/`))
+            ? 'page'
+            : undefined
+        }
+      >
+        {link.label}
+      </NavigationLink>
+    );
+  });
   const external = (
     <a href={github} className="github-link">
       GitHub <Arrow external />
@@ -42,6 +48,9 @@ export function Navigation({
       <nav className="desktop-navigation" aria-label="Main">
         {items}
         {external}
+        <div className="navigation-preferences" role="group" aria-label="Display preferences">
+          <ThemeSwitcher />
+        </div>
       </nav>
       <details
         className="mobile-navigation"
@@ -64,6 +73,9 @@ export function Navigation({
         <nav id="mobile-links" aria-label="Mobile">
           {items}
           {external}
+          <div className="navigation-preferences" role="group" aria-label="Display preferences">
+            <ThemeSwitcher />
+          </div>
         </nav>
       </details>
     </>
