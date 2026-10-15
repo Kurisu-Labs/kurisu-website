@@ -9,6 +9,7 @@ import {
 } from './schema';
 import { markdownTree, markdownLinks, safeUrl, walkMarkdown } from './markdown';
 import sharp from 'sharp';
+import { publicRepositories } from '../public-repositories';
 
 export function validateRecords(input: unknown[]) {
   const records = input.map((record) => recordSchema.parse(record));
@@ -32,7 +33,8 @@ export function validateRecords(input: unknown[]) {
     '/research',
     '/about',
     '/privacy',
-    ...(records.some((r) => r.kind === 'project' && r.publicationState === 'public')
+    ...(publicRepositories.length ||
+    records.some((r) => r.kind === 'project' && r.publicationState === 'public')
       ? ['/work']
       : []),
   ]);

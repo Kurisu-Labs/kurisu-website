@@ -1,0 +1,18 @@
+/* Frame the existing mark without changing its artwork or theme-independent paper ground. */
+.about-mark-frame {
+  position: relative;
+}
+
+.about-mark-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-maroon) 24%, transparent);
+  pointer-events: none;
+}
+
+/* Give the first reading accent the same breathing room as the later principles. */
+.about-principles .principles-list article[data-scroll-focus]:first-child {
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-line);
+}

@@ -1,0 +1,63 @@
+/* Lift the artwork, not its text or controls. Inner SVG idle loops remain independent. */
+@media (hover: hover) and (pointer: fine) {
+  .repository-row:is(:hover, :focus-within) .repository-diagram-svg {
+    border-color: var(--color-control-border);
+  }
+  .repository-row:is(:hover, :focus-within) .repository-diagram-registration {
+    stroke: var(--color-brand);
+  }
+  .hero-composition[data-pointer-active='true'] .field-heading {
+    border-color: var(--color-control-border);
+  }
+  .hero-composition[data-pointer-active='true'] .field-brand-core {
+    fill: var(--color-maroon-bright);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .repository-diagram-svg,
+  .process-glyph,
+  .about-mark img,
+  .content-figure img,
+  .brand-lockup .brand-mark,
+  .ambient-signal {
+    transition:
+      transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 240ms ease;
+  }
+  .repository-diagram-registration {
+    transition: stroke 240ms ease;
+  }
+  .repository-row:is(:hover, :focus-within) .repository-diagram-svg {
+    transform: perspective(700px) translateY(-3px) scale(1.018);
+  }
+  .repository-row[data-pointer-active='true'] .repository-diagram-svg {
+    transform: perspective(700px) translateY(-3px) rotateX(var(--tilt-x, 0deg))
+      rotateY(var(--tilt-y, 0deg)) scale(1.018);
+  }
+  .field-heading {
+    transition: border-color 240ms ease;
+  }
+  .field-brand-core {
+    transition: fill 300ms ease;
+  }
+  .process-list li:hover .process-glyph {
+    transform: translateY(-3px) rotate(-2deg) scale(1.05);
+  }
+  .about-mark:hover img {
+    transform: rotate(-2deg) scale(1.035);
+  }
+  .content-figure:hover img {
+    transform: translateY(-3px) scale(1.008);
+  }
+  .brand-lockup:is(:hover, :focus-visible) .brand-mark {
+    transform: translateY(-1px) rotate(-5deg);
+  }
+  .ambient-signal {
+    pointer-events: auto;
+    transform-origin: left center;
+  }
+  .ambient-signal:hover {
+    transform: scale(1.06);
+  }
+}

@@ -5,6 +5,7 @@ import sharp from 'sharp';
 const pages = [
   ['/', 'Building a decentralized future, together.'],
   ['/research', 'An agenda, shaped'],
+  ['/work', 'Work'],
   ['/about', 'An independent place'],
   ['/privacy', 'Privacy'],
 ];
@@ -25,7 +26,11 @@ test('public pages have content, canonical metadata and no runtime exceptions', 
     );
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-    await expect(page.getByRole('link', { name: 'Work', exact: true })).toHaveCount(0);
+    await expect(
+      page
+        .getByRole('navigation', { name: 'Main', exact: true, includeHidden: true })
+        .getByRole('link', { name: 'Work', exact: true, includeHidden: true }),
+    ).toHaveAttribute('href', '/work');
   }
   expect(errors).toEqual([]);
 });
@@ -34,7 +39,6 @@ test('unapproved, unknown and internal URLs return actual 404s without leaking c
 }) => {
   for (const route of [
     '/missing',
-    '/work',
     '/work/qa-fixture-system',
     '/work/evergreen',
     '/research/qa-fixture-note',
@@ -67,16 +71,28 @@ test('sitemap, robots, icons and branded social image are valid', async ({ reque
     expect((await response.body()).byteLength).toBeGreaterThan(100);
     if (path === '/opengraph-image') {
       const { data, info } = await sharp(await response.body())
-        .extract({ left: 72, top: 60, width: 60, height: 70 })
         .removeAlpha()
         .raw()
         .toBuffer({ resolveWithObject: true });
+      expect({ width: info.width, height: info.height }).toEqual({ width: 1200, height: 630 });
+      let obsidianPixels = 0;
+      let lightPixels = 0;
+      let greenAccentPixels = 0;
       let maroonPixels = 0;
       for (let index = 0; index < data.length; index += info.channels) {
-        if (data[index] > 40 && data[index] < 180 && data[index + 1] < 60 && data[index + 2] < 80)
-          maroonPixels++;
+        const red = data[index];
+        const green = data[index + 1];
+        const blue = data[index + 2];
+        if (red < 25 && green < 30 && blue < 25) obsidianPixels++;
+        if (red > 225 && green > 225 && blue > 210) lightPixels++;
+        if (green > 100 && green > red + 15 && green > blue + 15) greenAccentPixels++;
+        if (red > 40 && red < 180 && green < 60 && blue < 80) maroonPixels++;
       }
-      expect(maroonPixels).toBeGreaterThan(100);
+      // Maroon and rose carry the identity, including the research signal.
+      expect(obsidianPixels).toBeGreaterThan(info.width * info.height * 0.6);
+      expect(lightPixels).toBeGreaterThan(10000);
+      expect(greenAccentPixels).toBe(0);
+      expect(maroonPixels).toBeGreaterThan(30000);
     }
   }
 });
@@ -156,7 +172,9 @@ test('all public layouts reflow at every required width', async ({ page }) => {
       await page.goto(route);
       await page.evaluate(() => document.fonts.ready);
       expect(
-        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+        ),
         `${route} @ ${width}`,
       ).toBe(true);
     }
@@ -191,7 +209,11 @@ test('skip link and reduced motion remain usable at increased text size', async 
     'auto',
   );
   await page.evaluate(() => (document.documentElement.style.fontSize = '200%'));
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+    ),
+  ).toBe(true);
   if ((page.viewportSize()?.width ?? 1440) < 761) {
     const brand = (await page.locator('.header-inner .brand-lockup span').boundingBox())!;
     const menu = (await page.locator('.mobile-navigation summary').boundingBox())!;

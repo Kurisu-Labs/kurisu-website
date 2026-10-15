@@ -1,13 +1,16 @@
 import type { Metadata, MetadataRoute } from 'next';
 import type { PublicManifest } from './content/schema';
 import configuration from './site-content.json';
+import { publicRepositories } from './public-repositories';
 
 export const site = configuration.site;
 export const homeCopy = configuration.home;
 export const directions = configuration.directions;
 export function publicNavigation(manifest: PublicManifest) {
   return [
-    ...(manifest.projects.length ? [{ href: '/work', label: 'Work' }] : []),
+    ...(manifest.projects.length || publicRepositories.length
+      ? [{ href: '/work', label: 'Work' }]
+      : []),
     { href: '/research', label: 'Research' },
     { href: '/about', label: 'About' },
     { href: '/#contact', label: 'Contact' },
@@ -15,9 +18,13 @@ export function publicNavigation(manifest: PublicManifest) {
 }
 export function sitemapEntries(manifest: PublicManifest): MetadataRoute.Sitemap {
   return [
-    ...['/', '/research', '/about', '/privacy', ...(manifest.projects.length ? ['/work'] : [])].map(
-      (route) => ({ url: `${site.url}${route}` }),
-    ),
+    ...[
+      '/',
+      '/research',
+      '/about',
+      '/privacy',
+      ...(manifest.projects.length || publicRepositories.length ? ['/work'] : []),
+    ].map((route) => ({ url: `${site.url}${route}` })),
     ...manifest.projects.map((project) => ({
       url: `${site.url}/work/${project.slug}`,
       lastModified: project.statusReviewedAt,

@@ -5,7 +5,13 @@ import { indexable } from '@/lib/deployment';
 import { SiteHeader } from '@/components/site-header';
 import { ContactSection } from '@/components/contact-section';
 import { SiteFooter } from '@/components/site-footer';
+import { LabMotion } from '@/components/lab-motion';
+import { PageTransition } from '@/components/page-transition';
+import { themeBootstrapScript } from '@/lib/theme';
 import './globals.css';
+import '@/styles/lab-motion.css';
+import '@/styles/illustration-hover.css';
+import '@/styles/theme-switcher.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -23,8 +29,9 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const manifest = await getPublicManifest();
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <link
           rel="preload"
           href="/fonts/IBMPlexSans-Regular.woff2"
@@ -41,15 +48,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body>
+        <LabMotion />
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
         <SiteHeader manifest={manifest} />
-        <main id="main-content" tabIndex={-1}>
-          {children}
-          <ContactSection />
-        </main>
-        <SiteFooter />
+        <PageTransition>
+          <main id="main-content" tabIndex={-1}>
+            {children}
+            <ContactSection />
+          </main>
+        </PageTransition>
+        <SiteFooter manifest={manifest} />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { homeCopy, site } from '@/lib/site';
 import { CopyButton } from './copy-button';
 import { Arrow } from './icons';
+import { AmbientSignal } from './ambient-signal';
 export function ContactSection() {
   return (
     <section className="contact-section" id="contact" aria-labelledby="contact-title">
@@ -8,6 +9,7 @@ export function ContactSection() {
         <div>
           <p className="eyebrow">{homeCopy.contact.eyebrow}</p>
           <h2 id="contact-title">{homeCopy.contact.title}</h2>
+          <AmbientSignal />
         </div>
         <div className="contact-actions">
           <p>{homeCopy.contact.body}</p>

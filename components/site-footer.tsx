@@ -1,8 +1,10 @@
-import { site } from '@/lib/site';
+import { publicNavigation, site } from '@/lib/site';
+import type { PublicManifest } from '@/lib/content/schema';
 import { BrandMark } from './brand-mark';
 import { Arrow } from './icons';
 import Link from 'next/link';
-export function SiteFooter() {
+import { SectionLink } from './section-link';
+export function SiteFooter({ manifest }: { manifest: PublicManifest }) {
   return (
     <footer className="site-footer container">
       <div className="footer-brand">
@@ -18,8 +20,11 @@ export function SiteFooter() {
       </div>
       <nav aria-label="Footer">
         <Link href="/research">Research</Link>
+        {publicNavigation(manifest).some((link) => link.href === '/work') && (
+          <Link href="/work">Work</Link>
+        )}
         <Link href="/about">About</Link>
-        <Link href="/#contact">Contact</Link>
+        <SectionLink href="/#contact">Contact</SectionLink>
         <Link href="/privacy">Privacy</Link>
         <a href={site.github}>
           GitHub <Arrow external />

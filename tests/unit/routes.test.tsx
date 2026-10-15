@@ -24,9 +24,11 @@ beforeEach(() => {
   state.manifest = createPublicManifest([]);
 });
 describe('real route handlers consume approved records only', () => {
-  it('empty index and unknown detail/metadata invoke 404 with no enumerated slugs', async () => {
-    await expect(WorkPage()).rejects.toThrow(/404/);
-    await expect(workMetadata()).rejects.toThrow(/404/);
+  it('shows public repositories without activating unapproved detail routes', async () => {
+    const index = renderToStaticMarkup(await WorkPage());
+    expect(index).toContain('Public repositories');
+    expect(index).toContain('https://github.com/Kurisu-Labs/rentra');
+    expect((await workMetadata()).alternates?.canonical).toBe('https://kurisulabs.tech/work');
     expect(await projectParams()).toEqual([]);
     expect(await noteParams()).toEqual([]);
     const params = Promise.resolve({ slug: 'private-draft' });
@@ -34,6 +36,9 @@ describe('real route handlers consume approved records only', () => {
     await expect(projectMetadata({ params })).rejects.toThrow(/404/);
     await expect(ArticlePage({ params })).rejects.toThrow(/404/);
     await expect(noteMetadata({ params })).rejects.toThrow(/404/);
+    for (const slug of ['rentra', 'ruin-relay', 'zecsolve']) {
+      await expect(ProjectPage({ params: Promise.resolve({ slug }) })).rejects.toThrow(/404/);
+    }
   });
   it('approved detail routes, metadata, grouping and related entries work', async () => {
     state.manifest = createPublicManifest([

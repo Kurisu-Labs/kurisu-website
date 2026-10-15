@@ -1,0 +1,128 @@
+.process-glyph {
+  width: 6.5rem;
+  height: 4.5rem;
+  max-width: 50%;
+  flex-shrink: 0;
+  stroke: var(--color-brand);
+  stroke-width: 1.25;
+  overflow: visible;
+}
+
+.process-glyph-guide {
+  stroke: var(--color-line);
+}
+
+.process-glyph-dot {
+  fill: var(--color-brand);
+  stroke: none;
+}
+
+.process-glyph-block,
+.process-glyph-origin {
+  fill: color-mix(in srgb, var(--color-brand) 8%, transparent);
+}
+
+.process-glyph-bar {
+  stroke-width: 6;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.process-glyph-share {
+  transform-box: view-box;
+  transform-origin: 52px 36px;
+}
+
+.process-glyph-block-b {
+  --glyph-phase: -1.4s;
+}
+.process-glyph-block-c {
+  --glyph-phase: -2.8s;
+}
+.process-glyph-bar-b {
+  --glyph-phase: -1.2s;
+}
+.process-glyph-bar-c {
+  --glyph-phase: -2.4s;
+}
+
+/* No readiness attribute means no animation, including with JavaScript disabled. */
+@media (prefers-reduced-motion: no-preference) {
+  .process-glyph[data-ambient-ready='true'] .process-glyph-search {
+    animation: process-investigate-cycle 6.4s ease-in-out infinite paused;
+  }
+  .process-glyph[data-ambient-ready='true'] .process-glyph-block {
+    animation: process-assemble-cycle 5.6s ease-in-out var(--glyph-phase, 0s) infinite paused;
+  }
+  .process-glyph[data-ambient-ready='true'] .process-glyph-bar {
+    animation: process-evaluate-cycle 4.8s ease-in-out var(--glyph-phase, 0s) infinite paused;
+  }
+  .process-glyph[data-ambient-ready='true'] .process-glyph-share {
+    animation: process-share-cycle 5.8s ease-in-out infinite paused;
+  }
+
+  .process-glyph[data-ambient-ready='true'][data-ambient-running='true']
+    :is(.process-glyph-search, .process-glyph-block, .process-glyph-bar, .process-glyph-share) {
+    animation-play-state: running;
+  }
+}
+
+@keyframes process-investigate-cycle {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(8px, -4px);
+  }
+  65% {
+    transform: translate(-6px, 4px);
+  }
+}
+
+@keyframes process-assemble-cycle {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-7px);
+    opacity: 1;
+  }
+}
+
+@keyframes process-evaluate-cycle {
+  0%,
+  100% {
+    transform: scaleY(0.68);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scaleY(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes process-share-cycle {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .process-glyph-search,
+  .process-glyph-block,
+  .process-glyph-bar,
+  .process-glyph-share {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1;
+  }
+}

@@ -1,6 +1,6 @@
 # Kurisu Labs website
 
-A complete, content-led Next.js website for an independent research and engineering collective. The initial public site is research-first: Home, Research, About, Contact, Privacy and a custom 404. Work, project and research article templates are implemented but remain unavailable until real content is approved.
+A complete, content-led Next.js website for an independent research and engineering collective. The public site includes Home, Research, Work, About, Contact, Privacy and a custom 404. Work links a curated set of public Kurisu Labs repositories. Project case-study and research article templates remain unavailable until their actual content is approved.
 
 ## Run locally
 
@@ -43,9 +43,30 @@ The browser suite starts and stops its own two servers; those ports must be free
 
 ## Structure
 
+The Experimental Digital Laboratory interface pairs obsidian and off-white with the original maroon (`#6B0C1A`) and readable rose accents, including selected research signals. All accent colors stay within the maroon and rose palette. It uses local IBM Plex fonts and lightweight SVG. The Living Research Network is a server component: native radio controls and CSS expose the existing research descriptions without JavaScript. Its layout follows available width and text size. A small optional motion layer adds pointer lighting, bounded diagram movement, and scroll responses; content stays visible without JavaScript and reduced-motion preferences disable these effects. The original brand asset is preserved on a light tile.
+
+Portfolio columns adapt to available width and enlarged text. A short accent line highlights portfolio cards and workflow steps in the reading area using IntersectionObserver; it never moves the controls. Supporting browsers also draw a hero divider with a native CSS scroll timeline. Hidden or offscreen hero diagrams have no JavaScript scroll handler. Touch scrolling stays native, and no animation runs in a continuous JavaScript loop.
+
+The Research → Public Work → How We Work → Applied Collaboration → Contact boundaries share a decorative maroon rail in their existing padding. A native CSS view timeline draws the rail toward the next heading and moves a small marker as visitors scroll in either direction. The existing visibility observer enables it only while visible; background tabs, reduced motion, no JavaScript, and browsers without scroll-timeline support show the completed static rail. Workflow and contact backgrounds blend across the boundaries. Text, focus targets, and section spacing stay unchanged; Home's rail labels follow its section numbering.
+
+Work, Research, and About reuse this same rail between their main sections and into Contact. Their headings and supporting copy use the existing short entrance animation, while research directions and collective principles gain the existing reading-area accent. Section hosts and deep-link targets remain stationary. The shared contact component stays unchanged; a decorative page-owned boundary introduces it on these three pages. All enhancements use the existing observers and CSS timelines, with static no-JavaScript and reduced-motion fallbacks.
+
+Internal page links use Next.js navigation. After a pathname change commits, a single 260ms Web Animations opacity fade introduces the existing main landmark, including on Back/Forward. Header and footer stay outside the animated region; no extra layout wrapper, outgoing screenshot, navigation timeout, scroll handler, or animation dependency is added. Next retains scroll and focus restoration, while same-page anchors and initial page loads do not trigger the fade. Existing section entrances skip content already visible after route changes so they do not replay after the page fade. Reduced motion, a hidden tab, and a subsequent navigation cancel any active fade. Browsers without the animation API or JavaScript retain ordinary navigation.
+
+The navigation offers System, Light, and Dark themes. System follows the device preference, including without JavaScript; explicit choices persist locally under `kurisu-theme`. A small head script applies a saved theme before paint. Storage failures keep the current document usable. The light palette uses warm paper, dark ink, and the same maroon identity; the privacy notice describes this local preference.
+
+Fig. 01 has CSS-only orbit, signal, and core animations. It pauses while offscreen, while the tab is hidden, and briefly during pointer movement, then resumes after 600ms of pointer inactivity. Reduced-motion preferences disable it; mobile retains the simpler hero.
+
+The Living Research Network adds an optional center button labeled Next direction. It cycles the same four native radio choices, keeps focus on the button, and announces the selected direction. Direction labels sit above and below a dedicated diagram area, so traces meet their ports without passing behind text. Orbit and signal motion pauses offscreen, in background tabs, and under reduced motion. Content never rotates automatically. Without JavaScript, the original radio explorer remains available; narrow layouts keep the stacked research controls.
+
+Public repository cards include distinct SVG concept sketches based on their published descriptions, rather than product screenshots or invented results. Their signals and layers loop smoothly while visible, without requiring hover or a new scroll entrance. Workflow glyphs and shared signals in the mobile hero, collaboration, contact, and secondary page introductions use the same visible-only playback system. One IntersectionObserver controls these CSS transform/opacity loops; they pause offscreen and in background tabs, add no runtime dependencies, and remain static without JavaScript or with reduced motion.
+
+Decorative motion runs automatically while visible, with no manual pause controls or stored motion preference. The device's reduced-motion preference always takes precedence. Fine-pointer hover adds shallow perspective to repository illustrations using the existing event-driven pointer handler, plus small lifts on workflow glyphs, brand artwork, and article media. Inner idle loops keep their phase. Touch layouts and reduced-motion layouts omit these transforms.
+
 - `app/`: server-rendered pages, metadata, sitemap, robots and generated social image.
-- `components/`: shared editorial layouts; small client components for navigation and copy feedback.
+- `components/`: shared editorial layouts; small client components for navigation, copy feedback, and decorative motion.
 - `lib/site-content.json`: intended public identity, copy and research directions.
+- `lib/public-repositories.ts`: reviewed public repository links and brief README-based descriptions; no runtime GitHub access.
 - `lib/content/`: strict Zod schemas, Markdown validation, approval filtering and public manifest access.
 - `content/projects/`, `content/research/`: explicit allowlisted `.md` files only; empty is valid.
 - `authoring/`: non-published authoring examples.
@@ -62,7 +83,13 @@ Use trusted, repository-local Markdown with YAML frontmatter. Raw HTML and execu
 4. Put the reviewed file into `content/projects/` or `content/research/`. Run `npm run content:check`, tests and build. Restart dev or rerun `content:check` after content edits; the app reads the generated public manifest.
 5. Inspect its route, social metadata, sitemap and related links. Deploy only through a separately authorized release.
 
-The public manifest removes approval metadata and drafts before the application is bundled. Navigation, home selections, route resolution, related items, static parameters and sitemap share that manifest. No project means `/work` returns 404 and Work is absent from navigation/sitemap. Approved work activates it automatically.
+The public manifest removes approval metadata and drafts before the application is bundled. Case-study selections, detail route resolution, related items and static parameters share that manifest. The Work index, navigation and sitemap also include the separately reviewed public repository catalog. A catalog entry creates an external GitHub link, never a `/work/[slug]` case study. If both the catalog and approved projects are empty, `/work` returns 404 and Work is absent from navigation/sitemap.
+
+### Public repository portfolio
+
+The owner authorized links to public repositories in `Kurisu-Labs`, excluding this website and every private repository. On 2026-10-15, the unauthenticated public organization endpoint (`https://api.github.com/orgs/Kurisu-Labs/repos?type=public&per_page=100`) returned `rentra`, `ruin-relay`, `zecsolve`, and `kurisu-website`; the website is excluded. The catalog records the three included repositories, their API-reported primary language, README source URL and README blob revision. Descriptions summarize the README's stated purpose and scope, without importing contributors, performance claims, stars, or case-study attribution.
+
+To refresh the catalog, inspect the unauthenticated public API and each public README, check all pages if the API is paginated, then review the static entries. Never list authenticated private repositories, add private names as placeholders, or infer publication permission for a case study from a public repository. Remove an entry if it is no longer public. The site performs no GitHub requests at runtime and needs no GitHub token. Current source READMEs: [Rentra](https://github.com/Kurisu-Labs/rentra/blob/main/README.md), [Ruin Relay](https://github.com/Kurisu-Labs/ruin-relay/blob/main/README.md), and [zecsolve](https://github.com/Kurisu-Labs/zecsolve/blob/main/README.md).
 
 **A public Git repository exposes every committed file and its history.** Draft flags only control the built website. Keep confidential drafts, approval discussions, personal details and internal planning out of public Git history. This application has no draft URL, preview password or public fixture switch.
 
