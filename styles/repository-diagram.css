@@ -1,0 +1,225 @@
+.repository-diagram {
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 1.25rem;
+}
+
+.repository-diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-line);
+  background: radial-gradient(ellipse at 50% 50%, var(--color-field-wash), transparent 75%);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.repository-diagram figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding-top: 0.65rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.repository-diagram + .repository-content .repository-index {
+  margin-bottom: 1rem;
+}
+
+.repository-diagram-grid {
+  stroke: var(--color-line);
+  stroke-width: 0.6;
+  opacity: 0.55;
+}
+
+.repository-diagram-registration,
+.repository-diagram-line {
+  stroke: var(--color-control-border);
+  stroke-width: 1.25;
+}
+
+.repository-diagram-guide {
+  stroke: var(--color-control-border);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0.6;
+}
+
+.repository-diagram-panel {
+  fill: var(--color-surface);
+  stroke: var(--color-control-border);
+  stroke-width: 1.25;
+}
+
+.repository-diagram-emphasis {
+  fill: var(--color-surface-hover);
+  stroke: var(--color-brand);
+  stroke-width: 1.5;
+}
+
+.repository-diagram-trace,
+.repository-diagram-tick {
+  stroke: var(--color-brand);
+  stroke-width: 1.75;
+}
+
+.repository-diagram-trace {
+  opacity: 0.75;
+}
+
+.repository-diagram-route {
+  stroke-width: 2.5;
+}
+
+.repository-diagram-signal {
+  fill: var(--color-brand);
+}
+
+.repository-diagram-signal-halo {
+  fill: var(--color-brand);
+  opacity: 0.15;
+}
+
+.repository-diagram-mechanism {
+  transform-box: view-box;
+}
+
+[data-repository-diagram='rentra'] {
+  --repository-sketch-motion: repository-escrow-cycle;
+  --repository-sketch-duration: 7.5s;
+  --repository-sketch-phase: 0s;
+}
+
+[data-repository-diagram='ruin-relay'] {
+  --repository-sketch-motion: repository-relay-cycle;
+  --repository-sketch-duration: 8s;
+  --repository-sketch-phase: -1s;
+}
+
+[data-repository-diagram='zecsolve'] {
+  --repository-sketch-motion: repository-evidence-cycle;
+  --repository-sketch-duration: 6.5s;
+  --repository-sketch-phase: -1.5s;
+}
+
+/* Visibility owns playback; hover never restarts a loop. */
+@media (prefers-reduced-motion: no-preference) {
+  .repository-diagram[data-ambient-ready='true'] .repository-diagram-mechanism {
+    animation: var(--repository-sketch-motion) var(--repository-sketch-duration) ease-in-out
+      var(--repository-sketch-phase) infinite paused;
+  }
+
+  .repository-diagram[data-ambient-ready='true'] .repository-diagram-trace {
+    animation: repository-trace-cycle var(--repository-sketch-duration) ease-in-out
+      var(--repository-sketch-phase) infinite paused;
+  }
+
+  .repository-diagram[data-ambient-ready='true'] .repository-diagram-vault {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: repository-vault-cycle 7.5s ease-in-out infinite paused;
+  }
+
+  .repository-diagram[data-ambient-ready='true'][data-ambient-running='true']
+    :is(.repository-diagram-mechanism, .repository-diagram-trace, .repository-diagram-vault) {
+    animation-play-state: running;
+  }
+}
+
+@keyframes repository-escrow-cycle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25%,
+  30%,
+  70%,
+  75% {
+    transform: translateX(82px);
+  }
+  50% {
+    transform: translateX(164px);
+  }
+}
+
+@keyframes repository-relay-cycle {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  8%,
+  92% {
+    transform: translate(56px, 0);
+  }
+  13%,
+  87% {
+    transform: translate(56px, -28px);
+  }
+  21%,
+  79% {
+    transform: translate(112px, -28px);
+  }
+  26%,
+  74% {
+    transform: translate(112px, -56px);
+  }
+  34%,
+  66% {
+    transform: translate(168px, -56px);
+  }
+  39%,
+  61% {
+    transform: translate(168px, -84px);
+  }
+  47%,
+  53% {
+    transform: translate(224px, -84px);
+  }
+}
+
+@keyframes repository-evidence-cycle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes repository-vault-cycle {
+  0%,
+  50%,
+  100% {
+    transform: scale(1);
+  }
+  25%,
+  75% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes repository-trace-cycle {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .repository-diagram-mechanism,
+  .repository-diagram-trace,
+  .repository-diagram-vault {
+    animation: none !important;
+    transform: none !important;
+  }
+}
