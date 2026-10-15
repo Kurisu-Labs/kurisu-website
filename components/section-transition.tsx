@@ -1,19 +1,19 @@
 import '@/styles/section-transition.css';
 
 const passageLabels = {
-  'research-work': '01 — 02',
-  'work-method': '02 — 03',
-  'method-collaboration': '03 — 04',
-  'collaboration-contact': '04 — CONTACT',
-  'work-repositories': 'WORK — PUBLIC CODE',
-  'work-contact': 'WORK — CONTACT',
-  'research-directions': 'RESEARCH — DIRECTIONS',
-  'research-practice': 'DIRECTIONS — PRACTICE',
-  'research-contact': 'RESEARCH — CONTACT',
-  'about-collective': 'ABOUT — COLLECTIVE',
-  'about-principles': 'COLLECTIVE — PRINCIPLES',
-  'about-applied': 'PRINCIPLES — APPLIED',
-  'about-contact': 'ABOUT — CONTACT',
+  'research-work': '01 / 02',
+  'work-method': '02 / 03',
+  'method-collaboration': '03 / 04',
+  'collaboration-contact': '04 / CONTACT',
+  'work-repositories': 'WORK / PUBLIC CODE',
+  'work-contact': 'WORK / CONTACT',
+  'research-directions': 'RESEARCH / DIRECTIONS',
+  'research-practice': 'DIRECTIONS / PRACTICE',
+  'research-contact': 'RESEARCH / CONTACT',
+  'about-collective': 'ABOUT / COLLECTIVE',
+  'about-principles': 'COLLECTIVE / PRINCIPLES',
+  'about-applied': 'PRINCIPLES / APPLIED',
+  'about-contact': 'ABOUT / CONTACT',
 };
 
 /** A decorative handoff between sections; document flow and reading order stay unchanged. */
