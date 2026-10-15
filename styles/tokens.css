@@ -1,22 +1,30 @@
 /* Kurisu Labs semantic tokens. Local licensed IBM Plex files are loaded in app/globals.css. */
 :root {
-  color-scheme: light;
-  --color-brand: #6b0c1a;
+  color-scheme: dark;
+  --color-maroon: #6b0c1a;
+  --color-maroon-bright: #9c253c;
+  --color-brand: #f1a8b6;
   --color-link: var(--color-brand);
-  --color-brand-hover: #510914;
+  --color-brand-hover: #ffc0cd;
   --color-brand-soft: #f2dde1;
-  --color-bg: #fefcf9;
-  --color-surface: #f4eeea;
-  --color-text: #211b1d;
-  --color-text-muted: #6f6266;
-  --color-line: #d8cdd0; /* Decorative divider only; insufficient control border. */
-  --color-control-border: #8c7a80;
-  --color-dark: #211b1d;
-  --color-on-dark: #fefcf9;
+  --color-signal: #f6bcc7;
+  --color-bg: #101211;
+  --color-surface: #1c181a;
+  --color-text: #f1f0e8;
+  --color-text-muted: #b8aaae;
+  --color-line: #3d3035; /* Decorative dividers; controls use their own stronger border. */
+  --color-control-border: #9f8088;
+  --color-dark: #100c0e;
+  --color-on-dark: #f1f0e8;
   --color-link-on-dark: #f1a8b6;
-  --color-error: #b42318;
-  --color-success: #276749;
+  --color-error: #ffaaa0;
+  --color-success: var(--color-signal);
   --color-focus: var(--color-brand);
+  --color-surface-hover: #261c20;
+  --color-button-border: #b56779;
+  --color-field-wash: #6b0c1a66;
+  --color-contact-wash: #6b0c1a24;
+  --color-grid: #f1a8b60e;
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
   --text-body: 1.125rem;
@@ -35,11 +43,11 @@
   --space-16: 4rem;
   --space-24: 6rem;
   --space-32: 8rem;
-  --container-max: 75rem;
+  --container-max: 84rem;
   --article-max: 68ch;
   --page-gutter: clamp(1.25rem, 4vw, 4rem);
-  --radius-control: 0.25rem;
-  --radius-panel: 0.5rem;
+  --radius-control: 0.125rem;
+  --radius-panel: 0.125rem;
   --target-control: 2.75rem;
   --motion-fast: 150ms;
   --motion-base: 200ms;
@@ -47,12 +55,55 @@
   --ease-ui: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* A limited inverse surface, not a complete dark theme.
-   Components must use the local text/link/focus variables where applicable. */
+/* A paper-and-ink counterpart to the obsidian palette. Explicit choice wins over OS. */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f4f0e7;
+  --color-surface: #ebe5dc;
+  --color-surface-hover: #e5dcd3;
+  --color-text: #241f21;
+  --color-text-muted: #665a5f;
+  --color-brand: #79162a;
+  --color-brand-hover: #9c253c;
+  --color-brand-soft: #ead1d6;
+  --color-signal: #9c253c;
+  --color-line: #d4c8c7;
+  --color-control-border: #8b747a;
+  --color-button-border: #6b0c1a;
+  --color-field-wash: #9c253c14;
+  --color-contact-wash: #6b0c1a0a;
+  --color-grid: #79162a0c;
+  --color-error: #a3281a;
+}
+
+/* The same palette remains available when JavaScript or storage is unavailable. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --color-bg: #f4f0e7;
+    --color-surface: #ebe5dc;
+    --color-surface-hover: #e5dcd3;
+    --color-text: #241f21;
+    --color-text-muted: #665a5f;
+    --color-brand: #79162a;
+    --color-brand-hover: #9c253c;
+    --color-brand-soft: #ead1d6;
+    --color-signal: #9c253c;
+    --color-line: #d4c8c7;
+    --color-control-border: #8b747a;
+    --color-button-border: #6b0c1a;
+    --color-field-wash: #9c253c14;
+    --color-contact-wash: #6b0c1a0a;
+    --color-grid: #79162a0c;
+    --color-error: #a3281a;
+  }
+}
+
+/* Local dark surfaces share accessible foreground and focus colors. */
 [data-surface='inverse'] {
   --color-bg: var(--color-dark);
   --color-text: var(--color-on-dark);
-  --color-text-muted: #d8cdd0;
+  --color-text-muted: #b8aaae;
   --color-link: var(--color-link-on-dark);
   --color-focus: var(--color-link-on-dark);
 }
